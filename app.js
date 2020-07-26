@@ -14,7 +14,6 @@ const auth = require('./middleware/auth');
 const { clearImage } = require('./util/file');
 
 const app = express();
-const MONGODB_URL = process.env.MONGODB_URI;
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -101,7 +100,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URL)
+  .connect(process.env.MONGODB_URL)
   .then((result) => {
     app.listen(8080, () => {
       console.log('Server Running');
